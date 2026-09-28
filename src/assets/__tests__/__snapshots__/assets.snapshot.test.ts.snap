@@ -711,7 +711,7 @@ exports[`Assets Directory Snapshots > CDK assets > cdk/cdk/package.json should m
     "typescript": "~5.9.3"
   },
   "dependencies": {
-    "@aws/agentcore-cdk": "0.1.0-alpha.49",
+    "@aws/agentcore-cdk": "0.1.0-alpha.53",
     "aws-cdk-lib": "~2.261.0",
     "constructs": "~10.7.0"
   }
@@ -1948,7 +1948,7 @@ dependencies = [
     {{/if}}{{#if (eq modelProvider "Gemini")}}"langchain-google-genai >= 2.0.0",
     "google-genai >= 1.0.0, < 2.0.0",
     {{/if}}{{#if (eq modelProvider "OpenAI")}}"langchain-openai >= 0.2.0",
-    {{/if}}"aws-opentelemetry-distro",
+    {{/if}}"aws-opentelemetry-distro ~= 0.18.0",
     "opentelemetry-instrumentation-langchain >= 0.59.0",
     "bedrock-agentcore[a2a-v1] >= 1.19.0",
     "botocore[crt] >= 1.35.0",
@@ -2294,7 +2294,7 @@ requires-python = ">=3.10"
 dependencies = [
     {{#if (eq modelProvider "Anthropic")}}"anthropic >= 0.30.0",
     {{/if}}"a2a-sdk[all] >= 0.3.0, < 0.4.0",
-    "aws-opentelemetry-distro",
+    "aws-opentelemetry-distro ~= 0.18.0",
     "bedrock-agentcore[a2a] >= 1.9.1",
     "botocore[crt] >= 1.35.0",
     {{#if (eq modelProvider "Gemini")}}"google-genai >= 1.0.0",
@@ -2971,7 +2971,7 @@ dependencies = [
     {{/if}}{{#if (eq modelProvider "Gemini")}}"langchain-google-genai >= 2.0.0",
     "google-genai >= 1.0.0, < 2.0.0",
     {{/if}}{{#if (eq modelProvider "OpenAI")}}"langchain-openai >= 0.2.0",
-    {{/if}}"aws-opentelemetry-distro",
+    {{/if}}"aws-opentelemetry-distro ~= 0.18.0",
     "opentelemetry-instrumentation-langchain >= 0.59.0",
     "bedrock-agentcore >= 1.8.0",
     "botocore[crt] >= 1.35.0",
@@ -3314,7 +3314,7 @@ dependencies = [
     {{#if (eq modelProvider "Anthropic")}}"anthropic >= 0.30.0",
     {{/if}}"ag-ui-strands >= 0.1.7",
     "ag-ui-protocol >= 0.1.10",
-    "aws-opentelemetry-distro",
+    "aws-opentelemetry-distro ~= 0.18.0",
     "bedrock-agentcore >= 1.9.1",
     "botocore[crt] >= 1.35.0",
     "fastapi >= 0.115.12",
@@ -4872,7 +4872,7 @@ description = "AgentCore Runtime Application using LangChain/LangGraph"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "aws-opentelemetry-distro",
+    "aws-opentelemetry-distro ~= 0.18.0",
     "opentelemetry-instrumentation-langchain >= 0.59.0",
     "langgraph >= 1.0.2",
     "mcp ~= 1.24.0",
@@ -5341,7 +5341,7 @@ description = "AgentCore Runtime Application using OpenAI Agents SDK"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "aws-opentelemetry-distro",
+    "aws-opentelemetry-distro ~= 0.18.0",
     "openai-agents >= 0.16.0",
     "bedrock-agentcore >= 1.8.0",
     "botocore[crt] >= 1.35.0",
@@ -6577,7 +6577,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     {{#if (eq modelProvider "Anthropic")}}"anthropic >= 0.30.0",
-    {{/if}}"aws-opentelemetry-distro",
+    {{/if}}"aws-opentelemetry-distro ~= 0.18.0",
     "bedrock-agentcore >= 1.9.1",
     "botocore[crt] >= 1.35.0",
     {{#if (eq modelProvider "Gemini")}}"google-genai >= 1.0.0",
@@ -7577,7 +7577,7 @@ file maps to a JSON config file and includes validation constraints as comments 
 
 ### Key Types
 
-- **AgentCoreProjectSpec**: Root config with runtimes, memories, knowledge bases, credentials, evaluators, online evals and insights, gateways, policy engines, config bundles, A/B tests, harness registrations, datasets, and payment managers
+- **AgentCoreProjectSpec**: Root config with runtimes, memories, knowledge bases, credentials, evaluators, online evals and insights, gateways, policy engines, config bundles, A/B tests, harness registrations, datasets, payment managers, and capacity providers
 - **AgentEnvSpec**: Agent configuration (build type, entrypoint, code location, runtime version, network mode)
 - **Memory**: Memory resource with strategies (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) and expiry
 - **Credential**: API key or OAuth credential provider
@@ -7679,6 +7679,7 @@ Run \`agentcore --help\` or \`agentcore <command> --help\` for full flags. Commo
 | \`agentcore dev\` | Run agent locally with hot-reload |
 | \`agentcore deploy\` | Deploy to AWS |
 | \`agentcore invoke\` | Invoke agent (local or deployed) |
+| \`agentcore capacity-provider delete-session\` | Delete (deprovision) a live capacity provider session |
 | \`agentcore status\` | Show deployment status |
 | \`agentcore validate\` | Validate configuration |
 | \`agentcore package\` | Package agent artifacts |
@@ -7688,7 +7689,7 @@ Run \`agentcore --help\` or \`agentcore <command> --help\` for full flags. Commo
 
 | Command | Description |
 | --- | --- |
-| \`agentcore add <resource>\` | Add agent, memory, credential, gateway, gateway-target, evaluator, online-eval, online-insights, knowledge-base, harness, policy-engine, policy, payment-manager, payment-connector, config-bundle, dataset, runtime-endpoint |
+| \`agentcore add <resource>\` | Add agent, memory, credential, gateway, gateway-target, evaluator, online-eval, online-insights, knowledge-base, harness, policy-engine, policy, payment-manager, payment-connector, capacity-provider, config-bundle, dataset, runtime-endpoint |
 | \`agentcore remove <resource>\` | Remove any resource |
 | \`agentcore export harness\` | Export a harness to a Strands runtime agent under \`app/<agentName>/\` |
 

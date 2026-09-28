@@ -56,7 +56,7 @@ file maps to a JSON config file and includes validation constraints as comments 
 
 ### Key Types
 
-- **AgentCoreProjectSpec**: Root config with runtimes, memories, knowledge bases, credentials, evaluators, online evals and insights, gateways, policy engines, config bundles, A/B tests, harness registrations, datasets, and payment managers
+- **AgentCoreProjectSpec**: Root config with runtimes, memories, knowledge bases, credentials, evaluators, online evals and insights, gateways, policy engines, config bundles, A/B tests, harness registrations, datasets, payment managers, and capacity providers
 - **AgentEnvSpec**: Agent configuration (build type, entrypoint, code location, runtime version, network mode)
 - **Memory**: Memory resource with strategies (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) and expiry
 - **Credential**: API key or OAuth credential provider
@@ -158,6 +158,7 @@ Run `agentcore --help` or `agentcore <command> --help` for full flags. Commonly 
 | `agentcore dev` | Run agent locally with hot-reload |
 | `agentcore deploy` | Deploy to AWS |
 | `agentcore invoke` | Invoke agent (local or deployed) |
+| `agentcore capacity-provider delete-session` | Delete (deprovision) a live capacity provider session |
 | `agentcore status` | Show deployment status |
 | `agentcore validate` | Validate configuration |
 | `agentcore package` | Package agent artifacts |
@@ -167,7 +168,7 @@ Run `agentcore --help` or `agentcore <command> --help` for full flags. Commonly 
 
 | Command | Description |
 | --- | --- |
-| `agentcore add <resource>` | Add agent, memory, credential, gateway, gateway-target, evaluator, online-eval, online-insights, knowledge-base, harness, policy-engine, policy, payment-manager, payment-connector, config-bundle, dataset, runtime-endpoint |
+| `agentcore add <resource>` | Add agent, memory, credential, gateway, gateway-target, evaluator, online-eval, online-insights, knowledge-base, harness, policy-engine, policy, payment-manager, payment-connector, capacity-provider, config-bundle, dataset, runtime-endpoint |
 | `agentcore remove <resource>` | Remove any resource |
 | `agentcore export harness` | Export a harness to a Strands runtime agent under `app/<agentName>/` |
 

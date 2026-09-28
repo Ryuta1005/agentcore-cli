@@ -25,6 +25,7 @@ import {
   Mode,
   ModelProvider,
   NetworkMode,
+  OperatingSystem,
   OutboundAuthType,
   PolicyAttrSourceType,
   PolicyEngineMode,
@@ -48,6 +49,9 @@ const CreateAttrs = safeSchema({
   agent_source: AgentSource.optional(),
   network_mode: NetworkMode,
   has_agent: z.boolean(),
+  has_capacity_provider: z.boolean().optional(),
+  capacity_provider_by_arn: z.boolean().optional(),
+  cp_volume_mount_count: Count.optional(),
 });
 
 const AddAgentAttrs = safeSchema({
@@ -62,6 +66,9 @@ const AddAgentAttrs = safeSchema({
   memory_type: MemoryType,
   efs_mount_count: Count,
   s3_mount_count: Count,
+  has_capacity_provider: z.boolean(),
+  capacity_provider_by_arn: z.boolean(),
+  cp_volume_mount_count: Count,
 });
 
 const AddMemoryAttrs = safeSchema({
@@ -112,6 +119,20 @@ const AddPolicyAttrs = safeSchema({
 });
 
 const AddSkillAttrs = safeSchema({ skill_source_type: SkillSourceType });
+
+const AddCapacityProviderAttrs = safeSchema({
+  operating_system: OperatingSystem,
+  instance_type_count: Count,
+  subnet_count: Count,
+  security_group_count: Count,
+  volume_count: Count,
+  has_description: z.boolean(),
+});
+
+const DeleteCapacityProviderSessionAttrs = safeSchema({
+  /** Whether the capacity provider was targeted by raw ARN (no project) vs by project name. */
+  target_by_arn: z.boolean(),
+});
 
 const DeployAttrs = safeSchema({
   runtime_count: Count,
@@ -244,6 +265,7 @@ export const COMMAND_SCHEMAS = {
   'add.knowledge-base': AddKnowledgeBaseAttrs,
   'add.payment-manager': NoAttrs,
   'add.payment-connector': NoAttrs,
+  'add.capacity-provider': AddCapacityProviderAttrs,
   'add.skill': AddSkillAttrs,
   deploy: DeployAttrs,
 
@@ -307,6 +329,8 @@ export const COMMAND_SCHEMAS = {
   'dataset.remove-version': NoAttrs,
   'remove.payment-manager': NoAttrs,
   'remove.payment-connector': NoAttrs,
+  'remove.capacity-provider': NoAttrs,
+  'capacity-provider.delete-session': DeleteCapacityProviderSessionAttrs,
   'remove.skill': NoAttrs,
   'telemetry.disable': NoAttrs,
   'telemetry.enable': NoAttrs,

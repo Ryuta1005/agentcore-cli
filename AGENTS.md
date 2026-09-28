@@ -32,13 +32,14 @@ These options are available on all commands:
 
 - `create` - Create new AgentCore project
 - `add` - Add resources (agent, memory, credential, evaluator, online-eval, gateway, gateway-target, policy-engine,
-  policy, payment-manager, payment-connector)
+  policy, payment-manager, payment-connector, capacity-provider)
 - `remove` - Remove resources (agent, memory, credential, evaluator, online-eval, gateway, gateway-target,
-  policy-engine, policy, payment-manager, payment-connector, all)
+  policy-engine, policy, payment-manager, payment-connector, capacity-provider, all)
 - `deploy` - Deploy infrastructure to AWS
 - `status` - Check deployment status
 - `dev` - Local development server (CodeZip: uvicorn with hot-reload; Container: Docker build + run with volume mount)
 - `invoke` - Invoke agents (local or deployed)
+- `capacity-provider delete-session` - Delete (deprovision) a live capacity provider session (data-plane)
 - `run eval` - Run on-demand evaluation against agent sessions
 - `evals history` - View past eval run results
 - `fetch access` - Fetch access info for a deployed gateway or agent
@@ -90,6 +91,7 @@ Current primitives:
 - `PolicyPrimitive` — Cedar policy creation/removal within policy engines
 - `PaymentManagerPrimitive` — payment manager creation/removal with agent code wiring
 - `PaymentConnectorPrimitive` — payment connector creation/removal with credential management
+- `CapacityProviderPrimitive` — capacity provider creation/removal (customer-managed EC2 compute pool for runtimes)
 
 Singletons are created in `registry.ts` and wired into CLI commands via `cli.ts`. See `src/cli/AGENTS.md` for details on
 adding new primitives.

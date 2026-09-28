@@ -9,6 +9,41 @@ export type {
 
 export type { Dataset, DatasetSchemaType } from './dataset';
 export { DatasetNameSchema, DatasetSchema, DatasetSchemaTypeSchema } from './dataset';
+
+export type {
+  CapacityProvider,
+  CapacityProviderConfiguration,
+  ComputeConfiguration,
+  Ec2Configuration,
+  EbsVolumeConfiguration,
+  InstanceLifecycleConfiguration,
+  InstanceRequirements,
+  LaunchParameters,
+  OperatingSystem,
+  VolumeConfiguration,
+  VpcConfiguration,
+} from './capacity-provider';
+export {
+  CAPACITY_PROVIDER_ARN_PATTERN,
+  CAPACITY_PROVIDER_OPERATOR_ROLE_ARN_PATTERN,
+  CapacityProviderArnSchema,
+  CapacityProviderConfigurationSchema,
+  CapacityProviderNameSchema,
+  CapacityProviderSchema,
+  CapacityProviderVolumeNameSchema,
+  ComputeConfigurationSchema,
+  Ec2ConfigurationSchema,
+  EbsVolumeConfigurationSchema,
+  InstanceLifecycleConfigurationSchema,
+  InstanceRequirementsSchema,
+  isCapacityProviderArn,
+  isValidOperatorRoleArn,
+  LaunchParametersSchema,
+  OperatingSystemSchema,
+  OperatorRoleArnSchema,
+  VolumeConfigurationSchema,
+  VpcConfigurationSchema,
+} from './capacity-provider';
 export {
   ABTestNameSchema,
   ABTestDescriptionSchema,
